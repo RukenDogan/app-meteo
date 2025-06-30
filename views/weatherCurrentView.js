@@ -17,17 +17,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: 'white',
   },
+
   temperature: {
     fontSize: 36,
     fontWeight: 'bold',
+    color: 'white',
   },
+
   description: {
     fontSize: 18,
     marginBottom: 20,
+    color: 'white',
   },
+
 });

@@ -29,10 +29,11 @@ export default function App() {
   }, []); // Le tableau vide [] signifie que l'effet ne s'exécute qu'une seule fois, au démarrage de l'application
 
   if (isLoading) { // Si les données sont en cours de chargement, on affiche le LoaderView
-    return <LoaderView />; 
+    return <LoaderView />; // Affichage du LoaderView pendant le chargement des données
   }
 
-  if (error) {
+  // Si une erreur est survenue, on affiche un message d'erreur
+  if (error) { 
     return (
       <SafeAreaView style={styles.center}>
         <Text style={styles.errorText}>X {error}</Text>
@@ -40,6 +41,7 @@ export default function App() {
     );
   }
 
+  // Si les données sont chargées avec succès, on affiche les vues de météo actuelle et de prévisions
   return (
     <SafeAreaView style={styles.container}>
       <WeatherCurrentView data={weatherData.currentWeather} />
@@ -51,14 +53,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eef6fa',
+    backgroundColor: '#12d7ff',
     paddingTop: 40,
   },
+
   center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   errorText: {
     fontSize: 18,
     color: 'red',

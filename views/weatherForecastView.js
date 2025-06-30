@@ -2,14 +2,33 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 export default function WeatherForecastView({ data }) {
+  // On récupère la date du jour une seule fois
+  const today = new Date().getDate();
+
+  const formatDateTime = (dateTime) => {
+    const date = new Date(dateTime);
+    const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+    const dayName = dayNames[date.getDay()];
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    if (date.getDate() === today) {
+      return `${dayName} ${hours}:${minutes}`; // Aujourd'hui → affiche l’heure
+    } else {
+      return `${dayName} ${day}/${month}`; // Autres jours → affiche la date
+    }
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={data.list} // <-- ici
+        data={data.list}
         keyExtractor={(item) => item.dt.toString()}
         renderItem={({ item }) => (
           <View style={styles.dayContainer}>
-            <Text style={styles.day}>{item.dt_txt}</Text>
+            <Text style={styles.day}>{formatDateTime(item.dt_txt)}</Text>
             <Text style={styles.temperature}>{item.main.temp}°C</Text>
             <Text style={styles.description}>{item.weather[0].description}</Text>
           </View>
@@ -20,31 +39,39 @@ export default function WeatherForecastView({ data }) {
 }
 
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
   },
+
   dayContainer: {
     marginBottom: 20,
     padding: 10,
     backgroundColor: '#fff',
-    borderRadius: 5,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
   day: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
+
   temperature: {
     fontSize: 16,
     color: '#333',
   },
+
   description: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#666',
   },
-}); 
+});
