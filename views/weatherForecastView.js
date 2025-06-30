@@ -33,7 +33,7 @@ export default function WeatherForecastView({ data }) {
                             source={{ uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png` }}
                             style={styles.icon}
                         />
-                        <Text style={styles.temperature}>{item.main.temp}°C</Text>
+                        <Text style={styles.temperature}>{Math.round(item.main.temp)}°C</Text>
                         <Text style={styles.description}>{item.weather[0].description}</Text>
 
                     </View>

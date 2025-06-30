@@ -5,14 +5,13 @@ export default function WeatherCurrentView({ data }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{data.name}</Text>
-            <Text style={styles.temperature}>{data.main.temp}°C</Text>
+            <Text style={styles.temperature}>{Math.round(data.main.temp)}°C</Text>
             <Text style={styles.description}>{data.weather[0].description}</Text>
 
             <Image
                 source={{ uri: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` }}
                 style={{ width: 80, height: 80 }}
             />
-
         </View>
     );
 }
@@ -42,5 +41,4 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: 'white',
     },
-
 });
