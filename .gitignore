@@ -31,7 +31,15 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
 
 # typescript
 *.tsbuildinfo
+
+# Android/iOS natifs
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/build/
+
