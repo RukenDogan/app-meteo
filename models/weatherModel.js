@@ -25,8 +25,7 @@ export const getWeatherByCoords = async (lat, lon) => {
 // Fonction pour obtenir la météo par ID
 // L'ID est un identifiant unique pour une ville dans l'API OpenWeatherMap
 export const getWeatherById = async (id) => {
-    const url = `${BASE_URL}?id=${id}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=fr
-`;
+    const url = `${BASE_URL}?id=${id}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=fr`;
     const response = await fetch(url);
     const data = await response.json();
     return data;

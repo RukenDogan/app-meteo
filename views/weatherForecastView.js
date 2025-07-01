@@ -5,27 +5,29 @@ export default function WeatherForecastView({ data }) {
     // On récupère la date du jour une seule fois
     const today = new Date().getDate();
 
-    const formatDateTime = (dateTime) => {
-        const date = new Date(dateTime);
-        const dayNames = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
-        const dayName = dayNames[date.getDay()];
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
+    const formatDateTime = (dateTime) => { // Fonction pour formater la date et l'heure
+        const date = new Date(dateTime); // On crée un objet Date à partir de la chaîne de caractères
+        const dayNames = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']; 
+        const dayName = dayNames[date.getDay()]; // On récupère le nom du jour de la semaine
+        const day = date.getDate(); // On récupère le jour du mois
+        const month = date.getMonth() + 1; // les mois commencent à 0, donc on ajoute 1
+        const hours = date.getHours(); // On récupère l'heure
 
-        if (date.getDate() === today) {
-            return `${dayName} ${hours}:${minutes}`; // Aujourd'hui → affiche l’heure
+        if (date.getDate() === today) { // Si c'est aujourd'hui
+            return `${dayName} ${hours} h`; // Affiche l'heure pour aujourd'hui
         } else {
-            return `${dayName} ${day}/${month}`; // Autres jours → affiche la date
-        }
+            return `${dayName} \n${day}/${month} \n${hours} h`; // Affiche la date pour les autres jours
+        }        
     };
 
+    // FlatList pour afficher la liste des prévisions
     return (
         <View style={styles.container}>
             <FlatList
                 data={data.list}
                 keyExtractor={(item) => item.dt.toString()}
+                horizontal={true} // Affichage horizontal
+                showsHorizontalScrollIndicator={false} // Masque la barre de défilement horizontale
                 renderItem={({ item }) => (
                     <View style={styles.dayContainer}>
                         <Text style={styles.day}>{formatDateTime(item.dt_txt)}</Text>
@@ -33,7 +35,8 @@ export default function WeatherForecastView({ data }) {
                             source={{ uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png` }}
                             style={styles.icon}
                         />
-                        <Text style={styles.temperature}>{Math.round(item.main.temp)}°C</Text>
+                                
+                        <Text style={styles.temperature}>{Math.round(item.main.temp)}°C</Text> 
                         <Text style={styles.description}>{item.weather[0].description}</Text>
 
                     </View>
@@ -52,37 +55,36 @@ const styles = StyleSheet.create({
     },
 
     dayContainer: {
-        marginBottom: 20,
-        padding: 10,
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 15,
+        marginBottom: 100,
+        backgroundColor: '#e3e8e4',
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
+        width: 150, // Largeur fixe pour chaque jour
+        marginRight: 10, // Espace entre les jours
     },
 
     day: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
+        textAlign: 'center',
     },
 
     temperature: {
-        fontSize: 16,
-        color: '#333',
+        fontSize: 24,
+        color: '#0f4b6e',
+        fontWeight: 'bold',
     },
 
     description: {
-        fontSize: 16,
+        fontSize: 18,
         color: '#666',
     },
 
     icon: {
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
         marginBottom: 5,
     },
 

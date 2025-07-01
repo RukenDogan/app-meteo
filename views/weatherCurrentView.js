@@ -10,7 +10,7 @@ export default function WeatherCurrentView({ data }) {
 
             <Image
                 source={{ uri: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` }}
-                style={{ width: 80, height: 80 }}
+                style={{ width: 150, height: 150 }}
             />
         </View>
     );
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     },
 
     temperature: {
-        fontSize: 36,
+        fontSize: 56,
         fontWeight: 'bold',
         color: 'white',
     },
@@ -41,4 +41,5 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: 'white',
     },
+
 });
