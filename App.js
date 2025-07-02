@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
 import { loadWeatherData } from './controllers/weatherController';
 
-import WeatherCurrentView from './views/weatherCurrentView';
-import WeatherForecastView from './views/weatherForecastView';
-import LoaderView from './views/loaderView';
+import WeatherCurrentView from './components/weatherCurrentView';
+import WeatherForecastView from './components/weatherForecastView';
+import LoaderView from './components/loaderView';
 
 export default function App() {
   const [weatherData, setWeatherData] = useState(null); // État pour stocker les données météo

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 10,
         color: 'white',
@@ -37,9 +37,8 @@ const styles = StyleSheet.create({
     },
 
     description: {
-        fontSize: 18,
+        fontSize: 20,
         marginBottom: 20,
         color: 'white',
     },
-
 });

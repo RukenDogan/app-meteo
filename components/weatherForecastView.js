@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 
 export default function WeatherForecastView({ data }) {
@@ -7,17 +7,18 @@ export default function WeatherForecastView({ data }) {
 
     const formatDateTime = (dateTime) => { // Fonction pour formater la date et l'heure
         const date = new Date(dateTime); // On crée un objet Date à partir de la chaîne de caractères
+        const formatWithZero = (number) => number < 10 ? '0' + number : number; // Fonction pour formater les nombres (ajoute un zéro devant le chiffre en dessous de 10)
         const dayNames = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']; 
         const dayName = dayNames[date.getDay()]; // On récupère le nom du jour de la semaine
-        const day = date.getDate(); // On récupère le jour du mois
-        const month = date.getMonth() + 1; // les mois commencent à 0, donc on ajoute 1
+        const day = formatWithZero(date.getDate()); // On récupère la date du jour
+        const month = formatWithZero(date.getMonth() + 1); // les mois commencent à 0, donc on ajoute 1
         const hours = date.getHours(); // On récupère l'heure
 
         if (date.getDate() === today) { // Si c'est aujourd'hui
             return `${dayName} ${hours} h`; // Affiche l'heure pour aujourd'hui
-        } else {
+        } else { // Si c'est un autre jour
             return `${dayName} \n${day}/${month} \n${hours} h`; // Affiche la date pour les autres jours
-        }        
+        }
     };
 
     // FlatList pour afficher la liste des prévisions
@@ -45,7 +46,6 @@ export default function WeatherForecastView({ data }) {
         </View>
     );
 }
-
 
 
 const styles = StyleSheet.create({
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 18,
         color: '#666',
+        textAlign: 'center',
     },
 
     icon: {
@@ -87,5 +88,4 @@ const styles = StyleSheet.create({
         height: 70,
         marginBottom: 5,
     },
-
 });
