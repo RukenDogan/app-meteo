@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 
+
 export default function WeatherForecastView({ data }) {
+
     // On récupère la date du jour une seule fois
     const today = new Date().getDate();
 
     const formatDateTime = (dateTime) => { // Fonction pour formater la date et l'heure
         const date = new Date(dateTime); // On crée un objet Date à partir de la chaîne de caractères
         const formatWithZero = (number) => number < 10 ? '0' + number : number; // Fonction pour formater les nombres (ajoute un zéro devant le chiffre en dessous de 10)
-        const dayNames = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']; 
+        const dayNames = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
         const dayName = dayNames[date.getDay()]; // On récupère le nom du jour de la semaine
         const day = formatWithZero(date.getDate()); // On récupère la date du jour
         const month = formatWithZero(date.getMonth() + 1); // les mois commencent à 0, donc on ajoute 1
@@ -31,13 +33,16 @@ export default function WeatherForecastView({ data }) {
                 showsHorizontalScrollIndicator={false} // Masque la barre de défilement horizontale
                 renderItem={({ item }) => (
                     <View style={styles.dayContainer}>
-                        <Text style={styles.day}>{formatDateTime(item.dt_txt)}</Text>
+                        <Text style={styles.day} >
+                            {formatDateTime(item.dt_txt)}
+                        </Text>
+
                         <Image
                             source={{ uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png` }}
                             style={styles.icon}
                         />
-                                
-                        <Text style={styles.temperature}>{Math.round(item.main.temp)}°C</Text> 
+
+                        <Text style={styles.temperature}>{Math.round(item.main.temp)}°C</Text>
                         <Text style={styles.description}>{item.weather[0].description}</Text>
 
                     </View>
@@ -55,13 +60,24 @@ const styles = StyleSheet.create({
     },
 
     dayContainer: {
-        marginBottom: 100,
-        backgroundColor: '#e3e8e4',
+        marginBottom: 110,
+        marginTop: 50,
+        backgroundColor: 'white',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 150, // Largeur fixe pour chaque jour
+        width: 170, // Largeur fixe pour chaque jour
         marginRight: 10, // Espace entre les jours
+
+        // Ombres iOS
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        // Ombres Android
+        elevation: 5,
+
     },
 
     day: {
