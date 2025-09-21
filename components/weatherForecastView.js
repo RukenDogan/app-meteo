@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 30,
         marginBottom: 60,
-
     },
 
     dayContainer: {
@@ -153,8 +152,8 @@ const styles = StyleSheet.create({
 
     accordion: {
         backgroundColor: '#fffdfe',
-        borderRadius: 12,
-        marginBottom: 16,
+        // borderRadius: 12,
+        // marginBottom: 16,
 
         // ombre iOS
         shadowColor: '#000',

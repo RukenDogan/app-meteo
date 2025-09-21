@@ -23,3 +23,6 @@ Rendu : tout rendu se fera sous la forme d'un lien vers un repository GitHub. Au
 - Découpage de votre code en composants
 - Styliser votre application
 - Ajout d'un loader le temps que les données de l'API soient chargées.
+
+#Visuel :
+![Aperçu](image/appmeteo.jpg)
